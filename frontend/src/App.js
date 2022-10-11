@@ -26,6 +26,25 @@ function App() {
     setAllNotes(response.data)
   }
 
+  async function loadNotes(option){
+    const params = { priority: option };
+    const response = await api.get('/prioriteis', { params });
+
+    if (response ){
+      setAllNotes(response.data);
+    }
+  }
+
+  async function handleChange(e){
+    setSelectedValue(e.value);
+    setSelectedValue(event.target.value);
+    if (e.checked && e.valeu !== 'all'){
+      loadNotes(e.valeu);
+    } else {
+      getAllNotes();
+    }
+  }
+
   async function handleDelete(id){
     const deletedNote = await api.delete(`/annotations/${id}`);
 
@@ -93,7 +112,10 @@ function App() {
           </div>
           <button id="btn_submit" type='submit'>Salvar</button>
         </form>
-        < RadioButton />
+        < RadioButton 
+          selectedValue={selectedValue}
+          handleChange={handleChange}
+        />
       </aside>
       <main>
         <ul>

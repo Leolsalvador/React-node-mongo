@@ -1,30 +1,32 @@
 import * as React from 'react';
 import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
-export default function ControlledRadioButtonsGroup() {
-  const [value, setValue] = React.useState('sim');
+import './styles.css'
+
+export default function RadioButton({selectedValue, handleChange}) {
+  const [selectedValue, setSelectedValue] = React.useState('a');
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    
   };
 
   return (
-    <FormControl>
-      <FormLabel id="demo-controlled-radio-buttons-group">Prioridade</FormLabel>
-      <RadioGroup
-        aria-labelledby="demo-controlled-radio-buttons-group"
-        name="controlled-radio-buttons-group"
-        value={value}
+    <div className='radioOptions'>
+      <Radio
+        checked={selectedValue === 'all'}
         onChange={handleChange}
-      >
-        <FormControlLabel value="Todos" control={<Radio />} label="Todos" checked={selectedValue === 'all'}/>
-        <FormControlLabel value="Sim" control={<Radio />} label="Sim" checked={selectedValue === 'true'}/>
-        <FormControlLabel value="Não" control={<Radio />} label="Não" checked={selectedValue === 'false'}/>
-      </RadioGroup>
-    </FormControl>
+        value="a"
+        name="radio-buttons"
+        inputProps={{ 'aria-label': 'A' }}
+        />
+        <span>Todos</span>
+      <Radio
+        checked={selectedValue === 'b'}
+        onChange={handleChange}
+        value="b"
+        name="radio-buttons"
+        inputProps={{ 'aria-label': 'B' }}
+      />
+    </div>
   );
 }
